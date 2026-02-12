@@ -531,7 +531,7 @@ footer {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%
+        right: -100%;
         width: 100%;
         height: 100vh;
         flex-direction: column;
@@ -562,3 +562,4 @@ footer {
     .contact-wrapper { padding: 2rem; }
 
 }
+
