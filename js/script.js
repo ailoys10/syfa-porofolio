@@ -138,7 +138,7 @@ const skillCards = document.querySelectorAll('.skills-card');
 
 skillCards.forEach(card => {
     // Cari arrow di dalam SETIAP card
-    const arrow = card.querySelector('.icon-arrow'); // Pastikan class arrow-mu benar
+    const arrow = card.querySelector('.arrow-icon'); // Pastikan class arrow-mu benar
 
     if (arrow) {
         arrow.addEventListener('click', (e) => {
@@ -157,3 +157,4 @@ skillCards.forEach(card => {
     }
 
 });
+
