@@ -133,26 +133,27 @@ downloadBtn.addEventListener('click', () => {
 });
 
 // 7. Skill Card Toggle with Accordion Behavior
-const skillCards = document.querySelectorAll('.skill-card');
+// Ambil semua card skills
+const skillCards = document.querySelectorAll('.skills-card');
+
 skillCards.forEach(card => {
-    const arrow = card.querySelector('.arrow-icon');
-    
-    if (arrow) { // Pastikan arrow ada
+    // Cari arrow di dalam SETIAP card
+    const arrow = card.querySelector('.icon-arrow'); // Pastikan class arrow-mu benar
+
+    if (arrow) {
         arrow.addEventListener('click', (e) => {
-            // Mencegah klik 'tembus' ke elemen induk
             e.stopPropagation();
 
-            // Gunakan class 'open', jangan 'active' karena bentrok dengan reveal scroll
             const isOpen = card.classList.contains('open');
 
-            // Tutup kartu lain (sistem accordion)
-            // Ini menghapus class 'open', bukan 'active', jadi bubble tetap nampak
+            // Tutup semua card lain
             skillCards.forEach(c => c.classList.remove('open'));
 
-            // Jika sebelumnya tidak terbuka, maka buka sekarang
+            // Buka yang sedang diklik jika sebelumnya tertutup
             if (!isOpen) {
                 card.classList.add('open');
             }
         });
     }
+
 });
