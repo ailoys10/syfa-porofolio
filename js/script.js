@@ -133,28 +133,29 @@ downloadBtn.addEventListener('click', () => {
 });
 
 // 7. Skill Card Toggle with Accordion Behavior
-// Ambil semua card skills
-const skillCards = document.querySelectorAll('.skills-card');
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const skillCards = document.querySelectorAll('.skills-card');
 
-skillCards.forEach(card => {
-    // Cari arrow di dalam SETIAP card
-    const arrow = card.querySelector('.arrow-icon'); // Pastikan class arrow-mu benar
+    skillCards.forEach(card => {
+        // Ambil header-nya juga, biar klik di tulisan atau di panah sama-sama jalan
+        const header = card.querySelector('.skills-header');
+        const arrow = card.querySelector('.arrow-icon');
 
-    if (arrow) {
-        arrow.addEventListener('click', (e) => {
-            e.stopPropagation();
+        // Kita kasih perintah klik ke header-nya biar lebih gampang di-klik user
+        if (header) {
+            header.style.cursor = 'pointer'; // Biar kursor berubah jadi tangan
+            header.addEventListener('click', (e) => {
+                const isOpen = card.classList.contains('open');
 
-            const isOpen = card.classList.contains('open');
+                // Tutup semua yang lain dulu
+                skillCards.forEach(c => c.classList.remove('open'));
 
-            // Tutup semua card lain
-            skillCards.forEach(c => c.classList.remove('open'));
-
-            // Buka yang sedang diklik jika sebelumnya tertutup
-            if (!isOpen) {
-                card.classList.add('open');
-            }
-        });
-    }
-
+                // Kalau tadi tertutup, sekarang buka
+                if (!isOpen) {
+                    card.classList.add('open');
+                }
+            });
+        }
+    });
 });
-
