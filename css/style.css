@@ -200,10 +200,14 @@ section {
 
 .section-title {
     text-align: center;
-    margin-bottom: 4rem;
+    font-size: 2.1rem !important; /* Ukuran judul tetap besar */
+    color: #4a3411;
+    margin-bottom: 20px;
+    font-weight: 700;
+    display: block;
 }
 
-.section-title h2 {
+.section-title h2, .section-title h3{
     font-size: 2.5rem;
 }
 
@@ -221,28 +225,35 @@ section {
     margin: 0 auto 3rem;
 }
 
+/* --- SECTION SKILLS (CLEAN & RESPONSIVE) --- */
 .skills-grid {
-    display: flex;
-    flex-direction: row; /* Mengubah dari column ke row agar sejajar ke samping */
-    justify-content: center; /* Memastikan kartu berada di tengah */
-    align-items: flex-start; /* Menyelaraskan kartu dari atas */
-    gap: 1rem; /* Jarak antar kartu */
-    padding: 0 1rem;
-    max-width: 1200px; /* Lebar maksimal diperbesar agar cukup untuk 3 kartu */
+    display: grid;
+    /* Membuat 3 kolom otomatis yang akan turun jadi 1 kolom di HP */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+    max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap; /* Agar otomatis turun ke bawah jika layar terlalu sempit (mobile) */
 }
 
 .skill-card {
-    flex: 1; /* Membuat setiap kartu memiliki lebar yang sama */
-    min-width: 300px; /* Lebar minimal agar kartu tidak terlalu gepeng */
     background: var(--white);
-    padding: 1.5rem;
-    border-radius: 20px;
+    padding: 2rem;
+    border-radius: 24px;
     border: 1px solid rgba(139, 94, 26, 0.1);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    height: fit-content;
     text-align: left;
+}
+
+/* Efek angkat saat kursor di atas kartu */
+.skill-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(139, 94, 26, 0.1);
 }
 
 .skill-card-header {
@@ -254,7 +265,7 @@ section {
 
 .skill-card h4 {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text-main);
     margin: 0;
 }
@@ -263,50 +274,48 @@ section {
 .skill-content {
     max-height: 0;
     opacity: 0;
-    overflow: hidden; /* Tambahkan ini agar teks tidak tembus saat tertutup */
-    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
 }
 
 .skill-content p {
-    font-size: 0.9rem; /* Deskripsi lebih kecil */
-    line-height: 1.4;
-    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--text-sub);
 }
 
-.tag {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid var(--accent-gold);
-    border-radius: 50px;
-    font-size: 0.75rem;
-    color: var(--accent-gold);
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.tag:hover {
-    background: var(--accent-gold);
-    color: var(--white);
-}
-
-/* State Aktif (Saat di-klik/buka) */
+/* State Aktif saat kartu dibuka */
 .skill-card.open {
-    background: #fdfaf5; /* Warna krem lebih terang saat buka */
+    background: #fdfaf5;
     border-color: var(--accent-gold);
     box-shadow: 0 15px 30px rgba(139, 94, 26, 0.1);
 }
+
 .skill-card.open .skill-content {
-    max-height: 500px; /* Gunakan nilai yang cukup besar */
+    max-height: 1000px; /* Nilai besar agar semua konten muat */
     opacity: 1;
-    transition: max-height 0.5s cubic-bezier(1, 0, 1, 0), opacity 0.5s ease 0.1s;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(139, 94, 26, 0.2);
 }
 
-/* Efek saat bubble terbuka */
+/* Animasi Panah Bulat */
+.arrow-icon {
+    width: 35px;
+    height: 35px;
+    background: #f4ede4;
+    color: var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease, background 0.4s ease;
+}
+
 .skill-card.open .arrow-icon {
-    background: var(--accent-gold);
-    color: white;
     transform: rotate(180deg);
+    background: var(--accent-gold);
+    color: var(--white);
 }
 
 /* Tag Skills & Tools */
@@ -317,15 +326,28 @@ section {
     margin-top: 1.5rem;
 }
 
-.skill-card i {
+.tag {
+    background: rgba(139, 94, 26, 0.05);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(139, 94, 26, 0.1);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.tag:hover {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+/* Efek Ikon (Jika ada ikon FontAwesome di dalam kartu) */
+.skill-card i.main-icon {
     font-size: 2.5rem;
     color: var(--accent-gold);
     margin-bottom: 1.5rem;
-}
-
-.skill-card:hover {
-    border-color: var(--accent-gold);
-    transform: translateX(10px); /* Efek geser sedikit ke kanan */
+    display: block;
 }
 .arrow-icon {
     font-size: 0.8rem;
@@ -452,12 +474,12 @@ footer {
     padding: 60px 0;
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #4a3411;
-    margin-bottom: 40px;
-    font-weight: 700;
+#contact .section-title p {
+    font-size: 0.95rem !important;   /* Ukuran kecil */
+    font-weight: 400 !important;   /* Tidak bold */
+    font-family: 'Poppins', sans-serif; /* Ganti font khusus di sini jika mau */
+    color: var(--text-sub);
+    text-transform: none;          /* Pastikan tidak jadi huruf besar semua */
 }
 
 .experience-container {
@@ -530,21 +552,18 @@ footer {
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100vh;
+        top: -100%;
+        left: 0;
         flex-direction: column;
         background: var(--white);
         width: 100%;
         padding: 2rem;
         text-align: center;
-        transition: 0.5s ease-in-out;
-        z-index: 999;
+        transition: 0.4s ease-in-out;
         box-shadow: var(--shadow);
     }
     
-    .nav-links.active { right: 0; }
+    .nav-links.active { top: 70px; }
     .menu-toggle { display: block; }
     
     .hero-wrapper {
@@ -560,6 +579,4 @@ footer {
     
     .skills-grid { grid-template-columns: 1fr; }
     .contact-wrapper { padding: 2rem; }
-
 }
-
