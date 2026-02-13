@@ -132,33 +132,31 @@ downloadBtn.addEventListener('click', () => {
     document.body.removeChild(link);
 });
 
-// 7. Skill Card Toggle (Accordion) - VERSI FIX
+// 7. Skill Card Toggle (Accordion)
 document.addEventListener('DOMContentLoaded', () => {
-    const skillCards = document.querySelectorAll('.skills-card');
+    // Pastikan mencari class yang tepat: 'skill-card' (sesuai HTML kamu)
+    const skillCards = document.querySelectorAll('.skill-card');
 
-    if (skillCards.length > 0) {
-        skillCards.forEach(card => {
-            const header = card.querySelector('.skills-header');
-            
-            if (header) {
-                header.addEventListener('click', function(e) {
-                    // Berhenti sejenak biar ga kena event lain
-                    e.preventDefault(); 
-                    
-                    // Kita pakai class 'is-open', bukan 'active' atau 'open' 
-                    // supaya tidak bentrok dengan CSS reveal-on-scroll kamu
-                    const isOpen = card.classList.contains('is-open');
+    skillCards.forEach(card => {
+        // SESUAIKAN: Di HTML kamu namanya 'skill-card-header'
+        const header = card.querySelector('.skill-card-header');
+        
+        if (header) {
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', () => {
+                // Kita gunakan class 'open'
+                const isOpen = card.classList.contains('open');
 
-                    // Tutup kartu lain
-                    skillCards.forEach(c => c.classList.remove('is-open'));
+                // Tutup semua kartu lain
+                skillCards.forEach(c => c.classList.remove('open'));
 
-                    // Toggle kartu yang diklik
-                    if (!isOpen) {
-                        card.classList.add('is-open');
-                    }
-                });
-            }
-        });
-    }
+                // Jika tadi tertutup, buka sekarang
+                if (!isOpen) {
+                    card.classList.add('open');
+                }
+            });
+        }
+    });
 });
+
 
